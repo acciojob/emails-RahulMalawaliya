@@ -25,13 +25,11 @@ public class Gmail extends Email {
         // 1. Each mail in the inbox is distinct.
         // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
         Mail newMail = new Mail(date,sender,message);
-        if(inbox.size()<inboxCapacity){
-            inbox.add(newMail);
-        }else{
-            Mail curMail = inbox.get(0);
+        inbox.add(newMail);
+        if(inbox.size()>inboxCapacity)
+        {
+            trash.add(inbox.get(0));
             inbox.remove(0);
-            trash.add(curMail);
-            inbox.add(newMail);
         }
     }
 
@@ -77,15 +75,15 @@ public class Gmail extends Email {
     public int findMailsBetweenDates(Date start, Date end){
         //find number of mails in the inbox which are received between given dates
         //It is guaranteed that start date <= end date
-        int datecount=0;
-        for(int i=inbox.size()-1;i>=0;i--){
-            Mail curMail = inbox.get(i);
-            if (curMail.date.before(end) && curMail.date.after(start)){
-                datecount++;
-            }else if (curMail.date.equals(start) || curMail.date.equals(end))
-                datecount++;
+        int count = 0;
+
+        for(Mail mail : inbox){
+            Date d = mail.getDate();
+
+            if(d.equals(start) || d.equals(end) || (d.after(start) && d.before(end))) count++;
         }
-        return datecount;
+
+        return count;
 
     }
 

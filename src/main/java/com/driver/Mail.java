@@ -12,4 +12,16 @@ public class Mail {
         this.sender = sender;
         this.message = message;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }
