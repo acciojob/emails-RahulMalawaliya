@@ -36,11 +36,11 @@ public class Email {
             else
             {
                 System.out.println("please write valid password");
-                return;
             }
 
         }
-        else return;
+        else {
+        }
     }
     public static boolean isValid(String s) {
         // Initialize variables to track the presence of the required characters
