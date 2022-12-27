@@ -22,12 +22,14 @@ public class Gmail extends Email {
         // It is guaranteed that:
         // 1. Each mail in the inbox is distinct.
         // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
-        Mail newmail=new Mail(date,sender,message);
-        inbox.add(newmail);
-        if(inbox.size()>inboxCapacity)
-        {
-            trash.add(inbox.get(0));
+        Mail newMail = new Mail(date,sender,message);
+        if(inbox.size()<inboxCapacity){
+            inbox.add(newMail);
+        }else{
+            Mail curMail = inbox.get(0);
             inbox.remove(0);
+            trash.add(curMail);
+            inbox.add(newMail);
         }
     }
 
