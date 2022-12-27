@@ -12,11 +12,12 @@ public class Email {
     }
 
     public String getEmailId() {
-        return emailId;
+        return this.emailId;
     }
 
     public String getPassword() {
-        return password;
+
+        return this.password;
     }
 
     public void changePassword(String oldPassword, String newPassword){
@@ -31,6 +32,11 @@ public class Email {
             if(isValid(newPassword))
             {
                 System.out.println("succesfully changed");
+            }
+            else
+            {
+                System.out.println("please write valid password");
+                return;
             }
 
         }
