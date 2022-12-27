@@ -1,5 +1,6 @@
 package com.driver;
 
+
 public class Email {
 
     private String emailId;
@@ -25,5 +26,36 @@ public class Email {
         // 3. It contains at least one lowercase letter
         // 4. It contains at least one digit
         // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
+        if(oldPassword.equals(this.password)) {
+
+            if(isValid(newPassword))
+            {
+                System.out.println("succesfully changed");
+            }
+
+        }
+        else return;
+    }
+    public static boolean isValid(String s) {
+        // Initialize variables to track the presence of the required characters
+        boolean hasLower = false;
+        boolean hasUpper = false;
+        boolean hasDigit = false;
+        boolean hasSpecial = false;
+
+        // Check if the string has the required characters and set the variables accordingly
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isLowerCase(c)) {
+                hasLower = true;
+            } else if (Character.isUpperCase(c)) {
+                hasUpper = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            } else if (c == '@' || c == '#' || c == '$' || c == '%' || c == '^' || c == '&' || c == '+' || c == '=') {
+                hasSpecial = true;
+            }
+        }
+        return hasLower && hasUpper && hasDigit && hasSpecial && s.length() >= 8;
     }
 }
