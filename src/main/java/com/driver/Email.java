@@ -1,6 +1,5 @@
 package com.driver;
 
-
 public class Email {
 
     private String emailId;
@@ -12,12 +11,11 @@ public class Email {
     }
 
     public String getEmailId() {
-        return this.emailId;
+        return emailId;
     }
 
     public String getPassword() {
-
-        return this.password;
+        return password;
     }
 
     public void changePassword(String oldPassword, String newPassword){
@@ -27,41 +25,39 @@ public class Email {
         // 3. It contains at least one lowercase letter
         // 4. It contains at least one digit
         // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
-        if(oldPassword.equals(this.password)) {
 
-            if(isValid(newPassword))
-            {
-                System.out.println("succesfully changed");
-            }
-            else
-            {
-                System.out.println("please write valid password");
-            }
-
-        }
-        else {
+        if(this.getPassword().equals(oldPassword)){
+          if(newPassword.length()>=8 && checkUppercase(newPassword) && checkLowercase(newPassword) && checkDigit(newPassword) && checkSpecialCharacter(newPassword)){
+              this.password=newPassword;
+          }
         }
     }
-    public static boolean isValid(String s) {
-        // Initialize variables to track the presence of the required characters
-        boolean hasLower = false;
-        boolean hasUpper = false;
-        boolean hasDigit = false;
-        boolean hasSpecial = false;
-
-        // Check if the string has the required characters and set the variables accordingly
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (Character.isLowerCase(c)) {
-                hasLower = true;
-            } else if (Character.isUpperCase(c)) {
-                hasUpper = true;
-            } else if (Character.isDigit(c)) {
-                hasDigit = true;
-            } else if (c == '@' || c == '#' || c == '$' || c == '%' || c == '^' || c == '&' || c == '+' || c == '=') {
-                hasSpecial = true;
-            }
+    private boolean checkUppercase(String password){
+        for(int i=0; i<password.length(); i++){
+            if((int)password.charAt(i) >=65 && (int)password.charAt(i) <=90)
+                return true;
         }
-        return hasLower && hasUpper && hasDigit && hasSpecial && s.length() >= 8;
+        return false;
+    }
+    private boolean checkLowercase(String password){
+        for(int i=0; i<password.length(); i++){
+            if((int)password.charAt(i) >=97 && (int)password.charAt(i) <=122)
+                return true;
+        }
+        return false;
+    }
+    private boolean checkDigit(String password){
+        for(int i=0; i<password.length(); i++){
+            if((int)password.charAt(i) >=48 && (int)password.charAt(i) <=57)
+                return true;
+        }
+        return false;
+    }
+    private boolean checkSpecialCharacter(String password){
+        for(int i=0; i<password.length(); i++){
+            if(((int)password.charAt(i) >=32 && (int)password.charAt(i) <=47) || ((int)password.charAt(i) >=58 && (int)password.charAt(i) <=64) || ((int)password.charAt(i) >=91 && (int)password.charAt(i) <=96) || ((int)password.charAt(i) >=123 && (int)password.charAt(i) <=126))
+                return true;
+        }
+        return false;
     }
 }
